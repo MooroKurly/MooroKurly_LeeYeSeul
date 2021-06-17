@@ -39,6 +39,17 @@ router.post("/signup", [
         });
     }
     const { name, email, password, id, phone, address, birthday, gender } = req.body;
+    let userFields = {
+        id,
+        password,
+        name,
+        phone,
+        address
+    };
+    if (gender)
+        userFields.gender = gender;
+    if (birthday)
+        userFields.birthday = birthday;
     try {
         // See if  user exists
         let user = yield User_1.default.findOne({ id });
@@ -47,15 +58,7 @@ router.post("/signup", [
                 msg: "이미 가입된 아이디가 있습니다."
             });
         }
-        user = new User_1.default({
-            id,
-            password,
-            name,
-            phone,
-            address,
-            birthday,
-            gender
-        });
+        user = new User_1.default(userFields);
         //Encrypt password
         const salt = yield bcryptjs_1.default.genSalt(10);
         user.password = yield bcryptjs_1.default.hash(password, salt);
