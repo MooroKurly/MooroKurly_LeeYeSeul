@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import config from "../config";
 import { check, validationResult } from "express-validator";
-
+import { IUserInputDTO } from "../interface/IUser";
 const router = express.Router();
 
 import auth from "../middleware/auth";
@@ -34,7 +34,15 @@ router.post(
     }
 
     const { name, email, password, id, phone, address, birthday, gender } = req.body;
-
+    let userFields: IUserInputDTO = {
+        id,
+        password,
+        name,
+        phone,
+        address
+      };
+    if (gender) userFields.gender = gender;
+    if (birthday) userFields.birthday = birthday;
     try {
       // See if  user exists
       let user = await User.findOne({ id });
@@ -44,16 +52,8 @@ router.post(
             msg: "이미 가입된 아이디가 있습니다." 
         });
       }
-
-      user = new User({
-        id,
-        password,
-        name,
-        phone,
-        address,
-        birthday,
-        gender
-      });
+      user = new User(userFields);
+      
       //Encrypt password
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(password, salt);
