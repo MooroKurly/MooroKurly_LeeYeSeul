@@ -10,7 +10,7 @@ import auth from "../middleware/auth";
 import User from "../model/User";
 
 /**
- *  @route Post api/users
+ *  @route Post users/signup
  *  @desc Register User
  *  @access Public
  */
@@ -83,7 +83,7 @@ router.post(
 );
 
 /**
- *  @route Post api/auth
+ *  @route Post users/signin
  *  @desc Authenticate user & get token(로그인)
  *  @access Public
  */
