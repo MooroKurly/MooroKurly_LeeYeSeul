@@ -86,12 +86,14 @@ router.post("/signup", [
  *  @access Public
  */
 router.post("/signin", [
-    express_validator_1.check("id", "ID is required").exists(),
-    express_validator_1.check("password", "Password is required").exists(),
+    express_validator_1.check("id").exists(),
+    express_validator_1.check("password").exists()
 ], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const errors = express_validator_1.validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(400).json({
+            msg: "필요한 값이 없습니다."
+        });
     }
     const { id, password } = req.body;
     try {
