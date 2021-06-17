@@ -15,6 +15,6 @@ export interface IUserInputDTO{
     name:string;
     phone:string;
     address:string;
-    birthday:String;
-    gender:String;
+    birthday?:string;
+    gender?:string;
 }
