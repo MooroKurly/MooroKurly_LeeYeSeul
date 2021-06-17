@@ -77,7 +77,7 @@ router.post(
       );
     } catch (err) {
       console.error(err.message);
-      res.status(500).send("서버 내부 오류");
+      res.status(500).send({msg:"서버 내부 오류"});
     }
   }
 );
@@ -134,10 +134,42 @@ router.post(
         );
       } catch (err) {
         console.error(err.message);
-        res.status(500).send("서버 내부 오류");
+        res.status(500).send({msg:"서버 내부 오류"});
       }
     }
   );
+  
+/**
+ *  @route Post users/id-check
+ *  @desc check user id
+ *  @access Public
+ */
+
+router.post("/id-check",[check("id").exists()],
+async (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()){
+        res.status(400).send({msg:"필요한 값이 없습니다."});
+    }
+    const {id} = req.body;
+    try{
+        // See if  user exists
+      let user = await User.findOne({ id });
+
+      if (user) {
+        res.status(200).json({
+            msg: "이미 가입된 아이디가 있습니다.",
+            isValid:false
+        });
+      }
+      res.status(200).json({msg:"사용할 수 있는 아이디입니다.",isValid:true})
+    }
+    catch(err){
+        console.log(err.message);
+        res.status(500).send({msg:"서버 내부 오류"});
+    }
+})
+
 
 
 
