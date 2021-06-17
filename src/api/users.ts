@@ -90,13 +90,15 @@ router.post(
  router.post(
     "/signin",
     [
-      check("id", "ID is required").exists(),
-      check("password", "Password is required").exists(),
+      check("id").exists(),
+      check("password").exists()
     ],
     async (req: Request, res: Response) => {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(400).json({ 
+            msg: "필요한 값이 없습니다." 
+          });
       }
       const { id, password } = req.body;
   
