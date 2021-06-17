@@ -29,8 +29,7 @@ const UserSchema = new mongoose.Schema({
   },
   gender:{
       type: String,
-      required: false,
-      default: "남"
+      required: false
   },
   date: {
       type: Date,

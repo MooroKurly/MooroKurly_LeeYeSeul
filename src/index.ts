@@ -1,6 +1,6 @@
 import express from "express"; // [1]
 const app = express(); // [2]
-import connectDB from "./Loader/db";
+import connectDB from "./loader/db";
 
 // Connect Database
 connectDB();
@@ -8,7 +8,7 @@ connectDB();
 app.use(express.json()); // [3]
 
 // Define Routes
-app.use("/api/users", require("./api/users")); // [4]
+app.use("/users", require("./api/users")); // [4]
 
 // error handler
 app.use(function (err, req, res, next) {
