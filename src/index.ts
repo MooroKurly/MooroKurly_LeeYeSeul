@@ -9,6 +9,7 @@ app.use(express.json()); // [3]
 
 // Define Routes
 app.use("/users", require("./api/users")); // [4]
+app.use("/main", require("./api/main"));
 
 // error handler
 app.use(function (err, req, res, next) {

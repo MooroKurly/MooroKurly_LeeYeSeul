@@ -3,11 +3,11 @@ import mongoose from "mongoose";
 export interface ISale{
     product: mongoose.Types.ObjectId;
     discountRate: number;
-    saleIdx: number;
+    saleIndex: number;
 }
 
 export interface ISaleOutputDTO{
-    saleIdx: number;
+    saleIndex: number;
     product: mongoose.Types.ObjectId;
     discountRate: number;
     discountedPrice: number;

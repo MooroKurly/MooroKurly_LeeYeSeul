@@ -10,11 +10,11 @@ const SaleSchema = new mongoose.Schema({
       type: Number,
       required: true
   },
-  saleIdx:{
+  saleIndex:{
       type: Number,
       requied: true
   }
 
 });
 
-export default mongoose.model<ISale & mongoose.Document>("Recommend", SaleSchema);
+export default mongoose.model<ISale & mongoose.Document>("Sale", SaleSchema);
