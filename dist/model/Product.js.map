@@ -1,1 +1,1 @@
-{"version":3,"file":"Product.js","sourceRoot":"","sources":["../../src/model/Product.ts"],"names":[],"mappings":""}
+{"version":3,"file":"Product.js","sourceRoot":"","sources":["../../src/model/Product.ts"],"names":[],"mappings":";;;;;AAAA,wDAAgC;AAGhC,MAAM,aAAa,GAAG,IAAI,kBAAQ,CAAC,MAAM,CAAC;IACxC,GAAG,EAAE;QACH,IAAI,EAAE,MAAM;QACZ,QAAQ,EAAE,IAAI;KACf;IACD,IAAI,EAAC;QACD,IAAI,EAAE,MAAM;QACZ,QAAQ,EAAE,IAAI;KACjB;IACD,KAAK,EAAC;QACF,IAAI,EAAE,MAAM;QACZ,QAAQ,EAAE,IAAI;KACjB;CACF,CAAC,CAAC;AAEH,kBAAe,kBAAQ,CAAC,KAAK,CAA+B,SAAS,EAAE,aAAa,CAAC,CAAC"}
