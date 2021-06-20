@@ -21,20 +21,34 @@ router.get("/sales", (req, res) => __awaiter(void 0, void 0, void 0, function* (
     try {
         var sales = yield Sale_1.default.find().where('saleIndex').equals(Number(req.query.id)).populate("product");
         var salesOutput = [];
-        console.log(sales);
         if (!sales) {
             return res.status(204).send();
         }
-        for (let s of sales) {
-            let saleDTO = {
-                saleIndex: s.saleIndex,
-                product: s.product,
-                discountRate: s.discountRate,
-                discountedPrice: 4400 * s.discountRate / 100
-            };
-            salesOutput.push(saleDTO);
+        if (Number(req.query.id) == 1) {
+            for (let s of sales) {
+                let timeDTO = {
+                    saleIndex: s.saleIndex,
+                    product: s.product,
+                    discountRate: s.discountRate,
+                    discountedPrice: 4400 * s.discountRate / 100,
+                    time: "17:04:11"
+                };
+                salesOutput.push(timeDTO);
+            }
+            res.json({ msg: "할인 정보 조회 성공", sales: salesOutput });
         }
-        res.json({ msg: "할인 정보 조회 성공", sales: salesOutput });
+        else {
+            for (let s of sales) {
+                let saleDTO = {
+                    saleIndex: s.saleIndex,
+                    product: s.product,
+                    discountRate: s.discountRate,
+                    discountedPrice: 4400 * s.discountRate / 100
+                };
+                salesOutput.push(saleDTO);
+            }
+            res.json({ msg: "할인 정보 조회 성공", sales: salesOutput });
+        }
     }
     catch (error) {
         console.error(error.message);
