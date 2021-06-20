@@ -12,3 +12,11 @@ export interface ISaleOutputDTO{
     discountRate: number;
     discountedPrice: number;
 }
+
+export interface ITimeSaleOutputDTO{
+    saleIndex: number;
+    product: mongoose.Types.ObjectId;
+    time: string;
+    discountRate: number;
+    discountedPrice: number;
+}

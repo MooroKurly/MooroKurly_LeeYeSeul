@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { ISale, ISaleOutputDTO } from "../interface/ISale"
+import { ISale, ISaleOutputDTO, ITimeSaleOutputDTO } from "../interface/ISale"
 const router = express.Router();
 
 import Sale from "../model/Sale";
@@ -12,20 +12,34 @@ router.get(
         try{
             var sales = await Sale.find().where('saleIndex').equals(Number(req.query.id)).populate("product");
             var salesOutput: ISaleOutputDTO[]=[];
-            console.log(sales);
             if (!sales){
                 return res.status(204).send();
             }
-            for (let s of sales){
-                let saleDTO: ISaleOutputDTO = {
-                    saleIndex: s.saleIndex,
-                    product: s.product,
-                    discountRate: s.discountRate,
-                    discountedPrice: 4400 * s.discountRate / 100
-                };
-                salesOutput.push(saleDTO);
+            if (Number(req.query.id) == 1){
+                for (let s of sales){
+                    let timeDTO: ITimeSaleOutputDTO = {
+                        saleIndex: s.saleIndex,
+                        product: s.product,
+                        discountRate: s.discountRate,
+                        discountedPrice: 4400 * s.discountRate / 100,
+                        time: "17:04:11"
+                    };
+                    salesOutput.push(timeDTO);
+                }
+                res.json({msg:"할인 정보 조회 성공",sales:salesOutput});
             }
-            res.json({msg:"할인 정보 조회 성공",sales:salesOutput});
+            else{
+                for (let s of sales){
+                    let saleDTO: ISaleOutputDTO = {
+                        saleIndex: s.saleIndex,
+                        product: s.product,
+                        discountRate: s.discountRate,
+                        discountedPrice: 4400 * s.discountRate / 100
+                    };
+                    salesOutput.push(saleDTO);
+                }
+                res.json({msg:"할인 정보 조회 성공",sales:salesOutput});
+            }
         } catch (error){
             console.error(error.message);
             res.status(500).send({message:"Server Error"});
